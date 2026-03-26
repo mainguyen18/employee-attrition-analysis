@@ -1,0 +1,59 @@
+% !TeX program = pdflatex
+% !TeX encoding = UTF-8
+\documentclass[12pt,a4paper]{report}
+
+\input{preamble}
+
+\title{
+  \textbf{Nghiên cứu các yếu tố ảnh hưởng đến quyết định nghỉ việc của nhân viên:}\\
+  \textbf{Tiếp cận bằng mô hình Hồi quy Logistic}\\
+  \vspace{0.35cm}
+  \large Analyzing Factors Affecting Employee Attrition: A Logistic Regression Approach
+}
+\author{Nguyễn Thị Quỳnh Mai}
+\date{\today}
+
+\begin{document}
+
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+  {\LARGE\bfseries Nghiên cứu các yếu tố ảnh hưởng đến quyết định nghỉ việc của nhân viên:\par}
+  \vspace{0.25cm}
+  {\LARGE\bfseries Tiếp cận bằng mô hình Hồi quy Logistic\par}
+  \vspace{0.8cm}
+  {\Large\itshape Analyzing Factors Affecting Employee Attrition: A Logistic Regression Approach\par}
+  \vspace{2cm}
+  {\large Tác giả:\par}
+  {\Large\bfseries Nguyễn Thị Quỳnh Mai\par}
+  \vfill
+  {\large \today\par}
+\end{titlepage}
+
+\pagenumbering{roman}
+\tableofcontents
+\clearpage
+\listoffigures
+\addcontentsline{toc}{chapter}{Danh sách hình}
+\clearpage
+\listoftables
+\addcontentsline{toc}{chapter}{Danh sách bảng}
+\clearpage
+\pagenumbering{arabic}
+
+\input{sections/01_abstract}
+\input{sections/02_introduction}
+\input{sections/03_dataset}
+\input{sections/04_methodology}
+\input{sections/05_eda}
+\input{sections/06_model_evaluation}
+\input{sections/07_odds_ratio}
+\input{sections/08_discussion}
+\input{sections/09_conclusion}
+
+\appendix
+\input{sections/A_appendix_artifacts}
+
+\end{document}
+
+

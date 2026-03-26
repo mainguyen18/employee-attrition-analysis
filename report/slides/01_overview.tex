@@ -1,0 +1,55 @@
+% Overview slides
+\begin{frame}{Tổng quan nghiên cứu}
+  \Large \textbf{Employee Attrition} (Nghỉ việc)
+  
+  \vspace{0.4cm}
+  \textbf{Mục tiêu:}
+  \begin{itemize}
+    \item Dự đoán xác suất nhân viên nghỉ việc
+    \item Diễn giải các yếu tố ảnh hưởng bằng Odds Ratio
+  \end{itemize}
+  
+  \vspace{0.4cm}
+  \textbf{Phương pháp:}
+  \begin{itemize}
+    \item \textbf{Logistic Regression} (sklearn) cho dự đoán
+    \item \textbf{Logit} (statsmodels) cho suy luận thống kê
+  \end{itemize}
+  
+  \vspace{0.4cm}
+  \textbf{Dữ liệu:} 1{,}470 quan sát, tỷ lệ nghỉ việc: \textbf{16.12\%}
+
+  \vspace{0.4cm}
+  \small Toàn bộ mã nguồn và báo cáo được lưu trong kho lưu trữ:
+  \texttt{https://github.com/ti014/hr-employee-attrition-analysis.git}
+\end{frame}
+
+\begin{frame}{Kết quả chính - Hiệu năng mô hình}
+  \textbf{Hiệu năng mô hình:}
+  
+  \vspace{0.3cm}
+  \begin{itemize}
+    \item \textcolor{accentblue}{\textbf{ROC AUC}}: \Large \textbf{0.8031}
+    \item \textcolor{accentblue}{\textbf{Recall}}: \Large \textbf{0.6383} (phát hiện 64\% nhân sự nghỉ việc)
+    \item Accuracy: 0.7517
+    \item Precision: 0.3488
+    \item F1: 0.4511
+  \end{itemize}
+  
+  \vspace{0.4cm}
+  \begin{alertblock}{}
+    Mô hình dự đoán vượt trội baseline, phân biệt được phần lớn nhân sự nguy cơ cao (AUC > 80\%).
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Kết quả chính - Yếu tố nổi bật}
+  \textbf{Yếu tố ảnh hưởng nổi bật:}
+  
+  \vspace{0.3cm}
+  \begin{itemize}
+    \item \textcolor{mainred}{$\uparrow$ \textbf{OverTime\_Yes}}: làm tăng mãnh liệt xác suất nghỉ việc
+    \item \textcolor{mainred}{$\uparrow$ \textbf{JobRole\_Sales Representative}}: có rủi ro nghỉ việc đặc biệt cao
+    \item \textcolor{maingreen}{$\downarrow$ \textbf{EnvironmentSatisfaction}}: tỷ lệ nghịch với khả năng nghỉ việc, bảo vệ mạnh
+    \item \textcolor{maingreen}{$\downarrow$ \textbf{JobInvolvement}}: sự gắn kết bảo vệ nhân sự
+  \end{itemize}
+\end{frame}

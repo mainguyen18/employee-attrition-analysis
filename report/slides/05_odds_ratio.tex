@@ -1,0 +1,93 @@
+% Odds Ratio slides
+\begin{frame}{Odds Ratio (OR) - Diễn giải}
+  \textbf{Mô hình logit:}
+  \[
+  \log\left(\frac{p}{1-p}\right) = \beta_0 + \sum_{j=1}^{d}\beta_j x_j
+  \]
+  
+  \vspace{0.3cm}
+  \textbf{Ý nghĩa Odds-Ratio ($OR_j = e^{\beta_j}$):} 
+  
+  Tăng $x_j$ thêm 1 đơn vị (giữ các biến khác không đổi), odds rủi ro nghỉ việc sẽ \textbf{được nhân với $OR_j$}.
+  
+  \vspace{0.2cm}
+  \begin{itemize}
+    \item $OR_j > 1$: Tăng rủi ro (\textbf{Nhân tố áp lực})
+    \item $OR_j < 1$: Giảm rủi ro (\textbf{Nhân tố bảo vệ})
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Bảng Odds Ratio - Các chỉ số đỉnh cao}
+  \footnotesize
+  \begin{center}
+    \begin{tabular}{@{}lccc@{}}
+      \toprule
+      \textbf{Feature} & \textbf{OR} & \textbf{95\% CI} & \textbf{p-value} \\
+      \midrule
+      \textcolor{mainred}{\textbf{OverTime\_Yes}} & \textbf{7.2785} & [4.97, 10.64] & $< 10^{-23}$ \\
+      \textcolor{mainred}{\textbf{JobRole\_Sales Rep}} & \textbf{7.1923} & [2.44, 21.19] & 0.0003 \\
+      \textcolor{maingreen}{\textbf{EnvironmentSatisfaction}} & \textbf{0.6476} & [0.55, 0.76] & $< 10^{-6}$ \\
+      \textcolor{maingreen}{\textbf{JobInvolvement}} & \textbf{0.5891} & [0.46, 0.74] & $< 10^{-4}$ \\
+      \textcolor{mainred}{\textbf{BusinessTravel\_Freq}} & \textbf{6.7167} & [2.99, 15.06] & $< 10^{-5}$ \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  
+  \vspace{0.3cm}
+  \textit{Ghi chú}: Dummy biến `OverTime\_Yes` lấy `OverTime\_No` làm hệ quy chiếu (baseline).
+\end{frame}
+
+\begin{frame}{Forest Plot Odds Ratio}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{forest_plot_odds_ratio.png}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Yếu Tố Cảnh Báo (OR $\gg$ 1)}
+  \textcolor{mainred}{$\uparrow$ Tăng rủi ro nghỉ việc triệt để}
+  
+  \vspace{0.4cm}
+  \begin{itemize}
+    \item \textbf{OverTime\_Yes}: OR = 7.28
+    \begin{itemize}
+      \item Odds nghỉ việc tăng sốc (gấp 7.2 lần) so với người tuân thủ giờ làm hành chính. Áp lực công việc đóng vai trò số 1.
+    \end{itemize}
+    
+    \vspace{0.2cm}
+    \item \textbf{JobRole\_Sales Representative}: OR = 7.19
+    \begin{itemize}
+      \item Nỗi đau của HR ở bộ phận kinh doanh trực tiếp. Áp lực KPI bòn rút nhân viên nặng nề.
+    \end{itemize}
+    
+    \vspace{0.2cm}
+    \item \textbf{BusinessTravel\_Travel\_Frequently}: OR = 6.71
+    \begin{itemize}
+      \item Công tác liên miên đẩy nhân lực đến kiệt sức.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Yếu Tố Bảo Vệ (OR $<$ 1)}
+  \textcolor{maingreen}{$\downarrow$ Giảm rủi ro nghỉ việc}
+  
+  \vspace{0.4cm}
+  \begin{itemize}
+    \item \textbf{EnvironmentSatisfaction}: OR = 0.64
+    \begin{itemize}
+      \item Mỗi cấp độ cải thiện môi trường làm giảm 36\% odds rủi ro biến động.
+    \end{itemize}
+    
+    \vspace{0.2cm}
+    \item \textbf{JobInvolvement}: OR = 0.58
+    \begin{itemize}
+      \item Ràng buộc về mặt sự nghiệp và sự đồng hành trong công việc giảm tỷ lệ luân chuyển.
+    \end{itemize}
+    
+    \vspace{0.2cm}
+    \item \textbf{WorkLifeBalance}: OR = 0.68
+    \begin{itemize}
+      \item Đầu tư vào phúc lợi cân bằng cuộc sống có ý nghĩa chiến lược thiết thực. (p-value = 0.002)
+    \end{itemize}
+  \end{itemize}
+\end{frame}

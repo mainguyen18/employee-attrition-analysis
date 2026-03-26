@@ -1,0 +1,68 @@
+% Data and Methodology slides
+\begin{frame}{Dữ liệu}
+  \textbf{Dataset:} \texttt{WA\_Fn-UseC\_-HR-Employee-Attrition.csv} với 1{,}470 quan sát
+  
+  \vspace{0.4cm}
+  \textbf{Biến phân loại chính:}
+  \begin{itemize}
+    \item OverTime, JobRole, BusinessTravel, MaritalStatus
+  \end{itemize}
+  
+  \vspace{0.4cm}
+  \textbf{Biến số tiêu biểu:}
+  \begin{itemize}
+    \item Age, MonthlyIncome, YearsAtCompany
+    \item EnvironmentSatisfaction, JobInvolvement, DistanceFromHome
+  \end{itemize}
+  
+  \vspace{0.4cm}
+  \textbf{Biến mục tiêu:} \texttt{Attrition} (1 = Nghỉ việc, 0 = Ở lại)
+\end{frame}
+
+\begin{frame}{Dữ liệu - Lưu ý}
+  \begin{alertblock}{Lưu ý}
+    Tỷ lệ nghỉ việc 16.12\% $\Rightarrow$ mất cân bằng lớp (class imbalance) $\Rightarrow$ dùng \texttt{class\_weight='balanced'}
+  \end{alertblock}
+  
+  \vspace{0.4cm}
+  \textbf{Ý nghĩa:}
+  \begin{itemize}
+    \item Dataset chỉ có khoảng 16\% nhân viên nghỉ việc thực tế
+    \item Thuật toán LR dễ bị thiên hướng luôn dự đoán "Không nghỉ việc"
+    \item \texttt{class\_weight='balanced'} giúp mô hình học nhạy cảm hơn đối lưu các phần tử thiểu số
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Mô hình Logistic Regression - Công thức}
+  \textbf{Mô hình xác suất:} Với vector đặc trưng $x \in \mathbb{R}^d$:
+  \[
+  p(y=1\mid x) = \sigma(z) = \frac{1}{1+e^{-z}}, \quad z = \beta_0 + \beta^\top x
+  \]
+  
+  \vspace{0.5cm}
+  \textbf{Dạng logit (log-odds):}
+  \[
+  \log\left(\frac{p}{1-p}\right) = \beta_0 + \sum_{j=1}^{d}\beta_j x_j
+  \]
+\end{frame}
+
+\begin{frame}{Hàm mục tiêu và Regularization}
+  \textbf{Hàm mục tiêu:} Âm log-likelihood (NLL) kết hợp L2 regularization 
+  \[
+  \mathcal{L}(\beta) = -\sum_{i=1}^{n}\Big[y_i\log p_i + (1-y_i)\log(1-p_i)\Big] + \lambda \|\beta\|_2^2
+  \]
+  
+  \vspace{0.4cm}
+  \begin{itemize}
+    \item Regularization ngăn hệ số mô hình bùng nổ, dễ xử lý các biến số đo lường đơn vị lớn.
+  \end{itemize}
+  
+  \vspace{0.3cm}
+  \begin{alertblock}{Thiết kế Split \& Tiền Xử Lý}
+    \begin{itemize}
+      \item Train/Test theo stratified 80/20 nhằm đảm bảo phân bố 16\% xuyên suốt.
+      \item sklearn: Pipeline (OneHotEncoder + StandardScaler) phục vụ hệ thống máy học tốc độ cao.
+      \item statsmodels: Cung cấp p-value và tính Odds Ratio giải thích chuyên sâu.
+    \end{itemize}
+  \end{alertblock}
+\end{frame}

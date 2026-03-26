@@ -1,0 +1,4 @@
+BusinessTravel,n,churn_rate
+Travel_Frequently,277,0.2490974729241877
+Travel_Rarely,1043,0.14956855225311602
+Non-Travel,150,0.08

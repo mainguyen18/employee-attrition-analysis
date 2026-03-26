@@ -1,0 +1,42 @@
+% Conclusion slides
+\begin{frame}{Tổng Kết}
+  \textbf{Khái quát Mô hình:}
+  
+  \vspace{0.3cm}
+  \begin{itemize}
+    \item \textcolor{accentblue}{\textbf{ROC AUC}}: 0.8031. Quản trị phân loại rủi ro trên 80\%.
+    \item \textcolor{accentblue}{\textbf{Gắn nhãn cảnh báo (Recall)}}: 64\%. Đạt được mức trade-off hiệu quả.
+  \end{itemize}
+  
+  \vspace{0.4cm}
+  \begin{alertblock}{Đóng góp}
+    Báo cáo này loại bỏ phán đoán cảm tính, định lượng và định hình chính xác các lỗ hổng nhân sự, từ đó giảm rủi ro chảy máu chất xám cục bộ.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Khuyến nghị dành cho Phòng Nhân Sự}
+  \textbf{Actionable Recommendations:}
+  
+  \vspace{0.3cm}
+  \begin{enumerate}
+    \item \textbf{Can thiệp văn hoá làm ngoài giờ (OverTime)}
+    \begin{itemize}
+      \item Phải giới hạn mức độ huy động thêm giờ (yếu tố huỷ diệt nhất).
+    \end{itemize}
+    
+    \vspace{0.2cm}
+    \item \textbf{Cải tạo chính sách Kinh doanh (Sales Rep) và Công tác (TravelFreq)}
+    \begin{itemize}
+      \item Khuyến khích thưởng chéo, tăng chế độ công tác phí để bù đắp.
+    \end{itemize}
+    
+    \vspace{0.2cm}
+    \item \textbf{Lắng nghe môi trường sở tại (EnvironmentSatisfaction)}
+    \begin{itemize}
+      \item Quản lý trực tiếp tại điểm làm việc ảnh hưởng tối hậu nhất đến nhân viên. Khảo sát liên tục và chủ động giải quyết xung đột sớm.
+    \end{itemize}
+  \end{enumerate}
+  
+  \vspace{0.4cm}
+  \textbf{Tái lập quy trình:} \texttt{python scripts/run\_pipeline.py} (Report generation)
+\end{frame}

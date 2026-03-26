@@ -1,0 +1,26 @@
+\chapter{Giới thiệu}
+
+\section{Bối cảnh và bài toán}
+\textit{Employee attrition} (nhân viên nghỉ việc) là hiện tượng nhân sự rời bỏ công ty. Tổ chức thường ưu tiên nhận diện sớm nhóm nhân viên có nguy cơ biến động để triển khai chiến lược giữ chân nhân tài, do chi phí tuyển dụng và đào tạo nhân sự mới thường rất tốn kém.
+
+\section{Mục tiêu}
+Báo cáo đặt ra hai mục tiêu:
+\begin{itemize}
+  \item \textbf{Dự đoán} xác suất nghỉ việc cho từng nhân viên.
+  \item \textbf{Diễn giải} yếu tố ảnh hưởng bằng \textit{Odds Ratio} (tỷ số odds) để hỗ trợ quyết định nhân sự.
+\end{itemize}
+
+\section{Đóng góp (Deliverables)}
+Các đầu ra chính (artifacts) được lưu trong dự án:
+\begin{itemize}
+  \item \textbf{Metrics} mô hình: \texttt{assets/outputs/logistic\_metrics.json}
+  \item \textbf{Bảng Odds Ratio}: \texttt{assets/outputs/odds\_ratio\_table.csv}
+  \item \textbf{Statsmodels summary}: \texttt{assets/outputs/logit\_summary.txt}
+  \item \textbf{Báo cáo diễn giải OR}: \texttt{assets/outputs/odds\_ratio\_analysis.txt}
+  \item \textbf{Hình minh hoạ}: \texttt{assets/figures/*.png}
+\end{itemize}
+
+Toàn bộ mã nguồn và pipeline thực nghiệm của báo cáo này được public tại kho GitHub:
+\texttt{https://github.com/ti014/hr-employee-attrition-analysis.git}.
+
+

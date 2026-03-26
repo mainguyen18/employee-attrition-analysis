@@ -1,0 +1,48 @@
+\chapter{Dữ liệu}
+
+\section{Nguồn dữ liệu}
+Dataset sử dụng là \texttt{data/WA\_Fn-UseC\_-HR-Employee-Attrition.csv}. Biến mục tiêu (target) là \texttt{Attrition}.
+
+\section{Đặc tả biến (Feature specification)}
+Sau khi loại bỏ các biến không mang ý nghĩa dự đoán hoặc không có sự biến thiên (như \texttt{EmployeeNumber}, \texttt{EmployeeCount}, \texttt{Over18}, \texttt{StandardHours}, \texttt{Department}), các nhóm biến chính đưa vào mô hình gồm:
+\begin{itemize}
+  \item \textbf{Categorical features} (biến phân loại): \texttt{BusinessTravel}, \texttt{EducationField}, \texttt{Gender}, \texttt{JobRole}, \texttt{MaritalStatus}, \texttt{OverTime}.
+  \item \textbf{Numeric features} (biến số): Bao gồm \texttt{Age}, \texttt{MonthlyIncome}, \texttt{YearsAtCompany}, \texttt{EnvironmentSatisfaction}, \texttt{JobInvolvement}, \texttt{DistanceFromHome}, v.v.
+  \item \textbf{Biến mục tiêu}: \texttt{Attrition} (chuyển đối từ Yes/No sang 1/0).
+\end{itemize}
+
+\noindent
+Việc đặc tả biến theo nhóm phân loại và biến số liên tục phục vụ trực tiếp cho thiết kế pipeline mô hình: 
+(i) nhóm \textit{categorical} sẽ được mã hoá one-hot (get\_dummies) trong bước tiền xử lý, 
+(ii) nhóm \textit{numeric} được chuẩn hoá bằng StandardScaler để phù hợp với Logistic Regression có regularization, 
+và (iii) các cột không có giá trị học thuật bị loại bỏ hoàn toàn.
+
+\subsection*{Mô tả ý nghĩa một số biến nổi bật}
+\begin{itemize}
+  \item \texttt{Age}: Tuổi của nhân viên, đại diện cho thâm niên tuổi đời.
+  \item \textbf{Categorical - JobRole}: Vai trò công việc của nhân viên (vd: Sales Executive, Laboratory Technician). Các vai trò khác nhau sẽ có đặc thù áp lực và tỷ lệ nghỉ việc khác nhau.
+  \item \textbf{Categorical - OverTime}: Nhân viên có thường xuyên phải làm thêm giờ hay không (Yes/No). Đây là biến số cực kỳ quan trọng phản ánh áp lực công việc.
+  \item \texttt{MonthlyIncome}: Thu nhập hàng tháng của nhân viên.
+  \item \texttt{EnvironmentSatisfaction}: Đánh giá mức độ hài lòng về môi trường làm việc (từ 1 đến 4). Điểm số này càng thấp, nguy cơ nghỉ việc có thể càng cao.
+  \item \texttt{YearsAtCompany}: Tổng số năm nhân viên đã cống hiến tại công ty.
+  \item \texttt{DistancefromHome}: Khoảng cách từ nhà đến công ty, ảnh hưởng đến chi phí và thời gian đi lại.
+  \item \texttt{Attrition}: Biến mục tiêu nhị phân, bằng 1 (Yes) nếu nhân viên đã nghỉ việc và 0 (No) nếu vẫn đang làm việc tại công ty.
+\end{itemize}
+
+\section{Tổng quan bộ dữ liệu}
+Dataset ghi nhận thông tin của 1{,}470 nhân viên tại công ty, với nhiều biến giải thích bao trùm các khía cạnh: nhân khẩu học, mức độ hài lòng, và chế độ đãi ngộ. Biến mục tiêu là \texttt{Attrition}. Tỷ lệ nghỉ việc quan sát được ở mức xấp xỉ 16\%, tức là khoảng một phần sáu nhân viên trong mẫu đã chọn rời bỏ công ty. 
+
+Nhóm biến \textit{numeric} bao gồm các chỉ báo mức độ hài lòng (như \texttt{EnvironmentSatisfaction}, \texttt{JobInvolvement}) lẫn các biến phản ánh thời gian và thu nhập (\texttt{Age}, \texttt{MonthlyIncome}, \texttt{YearsAtCompany}), cho phép mô hình hoá cả \textit{chất lượng cảm nhận} và \textit{chế độ tài chính - thâm niên} của nhân viên. Nhóm biến \textit{categorical} (như \texttt{OverTime}, \texttt{JobRole}) giúp bắt được những yếu tố áp lực ngành nghề và thời gian làm việc vốn đóng vai trò rất lớn trong quyết định nghỉ việc.
+
+\section{Thống kê mô tả sơ bộ}
+Kết quả phân tích khám phá (EDA) cho thấy dữ liệu rất sạch, không có thiếu giá trị ở bất kỳ biến nào; do đó không cần áp dụng các bước xử lý missing values (Imputation) phức tạp. Tỷ lệ nghỉ việc 16.12\% là một con số phản ánh đúng tính chất của bài toán nhân sự thực tế, nơi chỉ có một nhóm thiểu số nhân viên rời đi, tạo ra bài toán phân loại mất cân bằng (imbalanced classification).
+
+Tóm tắt ở mức tổng quan, bộ dữ liệu có:
+\begin{itemize}
+  \item 1{,}470 quan sát (\texttt{n\_rows = 1470}).
+  \item Tỷ lệ nhân viên nghỉ việc \texttt{Attrition = Yes} ở mức xấp xỉ 16\%, phản ánh hiện tượng mất cân bằng lớp.
+  \item Dữ liệu hoàn chỉnh 100\%, không có missing values.
+\end{itemize}
+
+\section{Lưu ý về mất cân bằng lớp}
+Bài toán dự đoán tỷ lệ nghỉ việc thường có dạng \textit{class imbalance} (mất cân bằng lớp), do số lượng người ở lại luôn áp đảo số lượng người nghỉ việc. Do đó, trong phần mô hình hoá bằng thuật toán Machine Learning, hệ thống sử dụng tham số \texttt{class\_weight='balanced'} để điều chỉnh tự động trọng số lớp trong Logistic Regression, giúp mô hình nhạy bén hơn trong việc phát hiện những cá nhân sắp nghỉ.

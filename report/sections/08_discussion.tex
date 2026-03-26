@@ -1,0 +1,40 @@
+\chapter{Thảo luận và hạn chế}
+
+\section{Về ý nghĩa thực tiễn của OR với biến liên tục}
+Một điểm quan trọng khi diễn giải \textit{Odds Ratio} (tỷ số odds) là OR được hiểu theo \textbf{mức tăng 1 đơn vị} của biến.
+Với các biến có đơn vị rất lớn như \texttt{MonthlyIncome} hoặc \texttt{DailyRate}, OR theo ``1 đơn vị'' có thể rất gần 1 dù vẫn có ý nghĩa thống kê.
+Do đó, khi viết báo cáo cho team HR, ta có thể \textbf{rescale} (đổi thang đo) theo 1{,}000 hoặc 5{,}000 đơn vị (USD) để diễn giải dễ hiểu hơn về sức mạnh thực sự của lương thưởng.
+
+\section{Ngưỡng quyết định (Decision threshold) và trade-off}
+Trong đánh giá hiện tại, nhãn dự đoán được suy ra theo ngưỡng 0.5. 
+Tuy nhiên, bài toán attrition là bài toán mất cân bằng lớp; ngưỡng 0.5 hiếm khi tối ưu. 
+Trong triển khai thực tế, bộ phận HR nên chọn ngưỡng theo mục tiêu:
+\begin{itemize}
+  \item \textbf{Ưu tiên Recall} (giảm bỏ sót nhân sự giỏi sắp nghỉ): giảm threshold \(\Rightarrow\) tăng TP nhưng tăng FP.
+  \item \textbf{Ưu tiên Precision} (giảm chi phí tăng lương/đãi ngộ nhầm cho người vốn không định đi): tăng threshold \(\Rightarrow\) giảm FP nhưng tăng FN.
+\end{itemize}
+
+\section{Giả định và các hướng kiểm định bổ sung}
+Logistic Regression/Logit giả định quan hệ tuyến tính giữa biến và log-odds, có thể bị vi phạm nếu có phi tuyến hoặc tương tác biến.
+Một số hướng mở rộng hợp lý:
+\begin{itemize}
+  \item \textit{VIF} (Variance Inflation Factor - hệ số phóng đại phương sai) để kiểm tra đa cộng tuyến.
+  \item Kiểm tra tuyến tính của logit (ví dụ biến bậc hai, spline, hoặc binning cho biến liên tục).
+\end{itemize}
+
+\section{Ý nghĩa của intercept (hệ số chặn)}
+Từ \texttt{assets/outputs/logit\_summary.txt}, \(\beta_0 \approx -3.3923\). Khi đó xác suất nền tảng:
+\[
+p_0=\sigma(\beta_0)=\frac{1}{1+e^{-\beta_0}} \approx \frac{1}{1+e^{3.3923}} \approx 0.0326.
+\]
+Lưu ý: \(\beta_0\) phản ánh ``nhân viên cơ sở'' khi các biến bằng 0 (mang tính quy ước toán học); để intercept dễ diễn giải hơn trong nhân sự, thường center/standardize biến liên tục trước khi fit.
+
+\section{Thảo luận mở rộng và tổng kết hạn chế}
+Từ các kết quả hiện tại, có thể thấy rằng mô hình Logistic Regression cung cấp bức tranh định lượng rõ ràng về các yếu tố rủi ro và bảo vệ đối với churn, nhưng vẫn tồn tại một số giới hạn cần được nhận diện khi diễn giải:
+\begin{itemize}
+  \item \textbf{Về biến liên tục và đơn vị đo}: OR của \texttt{MonthlyIncome} rất gần 1 trên đơn vị gốc (1 USD). Việc chưa rescale trong mô hình hiện tại là chấp nhận được cho phân tích kỹ thuật, nhưng đưa báo cáo cho HR nên cân nhắc tính OR theo block 1000 USD.
+  \item \textbf{Về lựa chọn threshold}: ngưỡng 0.5 giúp chuẩn hoá so sánh mô hình, song chưa gắn trực tiếp với hàm chi phí tuyển dụng lại (FN). Báo cáo nên tiến hành tối ưu threshold dựa trên chi phí thay thế nhân sự thực tế.
+  \item \textbf{Về giả định mô hình}: các giả định tuyến tính log-odds và không đa cộng tuyến mới được nêu ở mức khái niệm, chưa được kiểm định bằng VIF hay các phép thử phi tuyến.
+  \item \textbf{Về diễn giải intercept}: hệ số chặn hiện tại mang ý nghĩa quy ước toán học. Việc xây dựng một ``nhân viên chuẩn hóa'' trung bình về Age, Income sẽ ý nghĩa hơn.
+\end{itemize}
+Những hạn chế này mở ra các hướng hoàn thiện mô hình trong tương lai: điều chỉnh thang đo cho biến liên tục, tối ưu hoá threshold theo chi phí, kiểm định giả định bằng các công cụ chẩn đoán, và cân nhắc so sánh với các mô hình phi tuyến để kiểm tra độ bền của các kết luận về chiều và độ lớn của hiệu ứng.

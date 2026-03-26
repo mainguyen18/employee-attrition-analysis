@@ -1,0 +1,25 @@
+\chapter{Kết luận và khuyến nghị}
+
+\section{Kết luận}
+Dựa trên kết quả hiện tại (artifacts trong \texttt{assets/outputs/}):
+\begin{itemize}
+  \item Mô hình Logistic Regression đạt ROC AUC = 0.8031 và Recall = 0.6383 trên tập test.
+  \item Phân tích Odds Ratio cho thấy yếu tố lớn nhất thúc đẩy nhân viên rời bỏ là \textbf{OverTime} và vai trò đặc thù như \textbf{Sales Representative}. Ngược lại, việc tăng cường \textbf{EnvironmentSatisfaction} và \textbf{JobInvolvement} làm giảm đáng kể nguy cơ nghỉ việc.
+\end{itemize}
+So với mô hình baseline luôn đoán khách ``ở lại'', mô hình đề xuất cải thiện rõ rệt khả năng phát hiện nhân tài sắp ra đi, cung cấp các luận cứ định lượng chính xác để phòng Nhân Sự hành động sớm.
+
+\section{Khuyến nghị (Actionable recommendations)}
+\begin{itemize}
+  \item Cải thiện \textbf{EnvironmentSatisfaction} và theo dõi sát sao mức độ hài lòng về môi trường làm việc vì đây là rào chắn hiệu quả chống lại mong muốn nghỉ việc.
+  \item \textbf{Tuyệt đối lưu tâm đến OverTime}: Việc bắt buộc nhân viên làm ngoài giờ làm tăng mạnh xác suất nghỉ việc. Cần cân đối lại workload.
+  \item Đánh giá lại cơ chế đãi ngộ và hỗ trợ tinh thần cho các \textbf{Sales Representative} vì nhóm này có biến động rất lớn.
+  \item Tối ưu \textbf{decision threshold} theo chi phí (expected cost) thay vì cố định 0.5.
+\end{itemize}
+
+\section{Tái lập (Reproducibility)}
+Pipeline tạo lại toàn bộ artifacts và hình minh hoạ (tham khảo thêm \texttt{report/README.md}):
+\begin{verbatim}
+python scripts/run_pipeline.py
+\end{verbatim}
+
+

@@ -1,0 +1,16 @@
+\chapter*{Tóm tắt (Abstract)}
+\addcontentsline{toc}{chapter}{Tóm tắt (Abstract)}
+
+Báo cáo này nghiên cứu bài toán \textit{employee attrition} (nhân viên nghỉ việc) với mục tiêu \textbf{(i) dự đoán khả năng nghỉ việc} và \textbf{(ii) diễn giải các yếu tố ảnh hưởng}. 
+Dữ liệu gồm 1{,}470 quan sát; biến mục tiêu là \texttt{Attrition} (1 = nghỉ việc, 0 = ở lại).
+
+Phương pháp chính gồm:
+\begin{itemize}
+  \item \textit{Logistic Regression} (hồi quy logistic) trong \textit{sklearn pipeline} (pipeline của sklearn) để dự đoán.
+  \item \textit{Logit} (mô hình logit) trong \textit{statsmodels} để suy luận thống kê và báo cáo \textit{Odds Ratio} (tỷ số odds), khoảng tin cậy 95\% và p-value.
+\end{itemize}
+
+Kết quả trên tập test (từ \texttt{assets/outputs/logistic\_metrics.json}): ROC AUC = 0.8031, Accuracy = 0.7517, Precision = 0.3488, Recall = 0.6383, F1 = 0.4511. 
+Về diễn giải, các yếu tố nổi bật gồm: \textbf{OverTime\_Yes} làm tăng odds nghỉ việc rất mạnh; \textbf{EnvironmentSatisfaction} và \textbf{JobInvolvement} làm giảm odds nghỉ việc đáng kể.
+
+

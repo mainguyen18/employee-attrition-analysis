@@ -1,0 +1,38 @@
+\chapter{Mô hình và đánh giá}
+
+\section{Thiết lập mô hình}
+Mô hình dự đoán sử dụng \textit{Logistic Regression} (hồi quy logistic) trong \textit{sklearn pipeline} (pipeline của sklearn). 
+Trong bối cảnh mất cân bằng lớp, mô hình dùng \texttt{class\_weight='balanced'} để giảm thiên lệch về lớp majority.
+
+\section{Kết quả đánh giá (Metrics)}
+\input{tables/metrics}
+\input{tables/confusion_matrix}
+
+So với một baseline đơn giản chỉ luôn dự đoán ``ở lại'' (luôn dự đoán lớp 0), mô hình đạt ROC AUC và Recall cao hơn đáng kể, đồng thời nhận diện được gần 2/3 tổng số nhân viên thực sự sẽ rời đi (Recall ~ 0.64). Điều này mang lại giá trị thực tiễn rất cao trong bối cảnh phòng Nhân sự (HR) ưu tiên phát hiện sớm nguy cơ chảy máu chất xám để có biện pháp can thiệp.
+
+\section{Biểu đồ đánh giá}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.78\textwidth]{roc_curve.png}
+  \caption{ROC curve}
+\end{figure}
+Đường cong ROC cho thấy mô hình đạt diện tích dưới đường cong (ROC AUC) xấp xỉ 0.80, cao hơn đáng kể so với đường chéo ngẫu nhiên (AUC = 0.5). Điều này hàm ý rằng, nếu chọn ngẫu nhiên một nhân viên đã nghỉ việc và một nhân viên ở lại, xác suất để mô hình gán điểm rủi ro nghỉ việc cao hơn cho nhân viên thực sự nghỉ việc là khoảng 80\%. Khu vực phía trên bên trái của đường cong thể hiện các ngưỡng mà tại đó \textit{True Positive Rate} (TPR) cao trong khi \textit{False Positive Rate} (FPR) vẫn ở mức chấp nhận được, là vùng hoạt động tiềm năng cho các chính sách giữ chân nhân tài của HR.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.65\textwidth]{confusion_matrix.png}
+  \caption{Confusion matrix}
+\end{figure}
+Confusion matrix minh hoạ chi tiết cách mô hình phân loại trên tập test tại ngưỡng quyết định hiện hành (0.5). Số lượng \textit{True Negative} (TN) cao cho thấy mô hình ít cảnh báo nhầm những người vốn trung thành là sẽ nghỉ việc. Trong khi phần \textit{True Positive} (TP) phản ánh số lượng nhân viên nghỉ việc thực tế được phát hiện đúng. Ngược lại, \textit{False Positive} (FP) tương ứng với các nhân viên bị cảnh báo rủi ro rời đi nhưng thực tế không đổi việc (gây tốn kém nguồn lực chăm sóc dư thừa), còn \textit{False Negative} (FN) là các nhân viên nghỉ việc bị bỏ sót (rủi ro chảy máu chất xám). Với Recall khoảng 0.64, mô hình bắt được 64\% các nhân viên sắp rời đi, chấp nhận một tỷ lệ FP nhất định -- điều này phù hợp với định hướng nhân sự là thà chăm sóc nhầm còn hơn bỏ sót người tài có nguy cơ ra đi.
+
+\section{Diễn giải chi tiết về trade-off}
+Kết hợp giữa các chỉ số tổng hợp (ROC AUC, F1, Recall, Precision) và hai biểu đồ trên cho thấy mô hình đang cấu hình theo hướng ưu tiên \textit{không bỏ sót nhân viên có nguy cơ nghỉ việc}. Với tính chất của quản trị nhân sự, \textit{Recall} (độ bao phủ) cao giúp giảm số ca bỏ sót (giảm FN), dù có thể làm giảm \textit{Precision} (độ chính xác) và tăng cảnh báo nhầm (FP). 
+
+Mỗi điểm trên đường cong ROC tương ứng với một \textit{decision threshold} (ngưỡng quyết định) khác nhau để chuyển xác suất dự đoán thành nhãn 0/1. Trong thực tế, việc lựa chọn threshold nên dựa trên chi phí và lợi ích cụ thể của tổ chức: 
+\begin{itemize}
+  \item Nếu chi phí tuyển dụng và đào tạo nhân tài thay thế (do FN) lớn hơn đáng kể so với chi phí của một buổi trò chuyện hay đãi ngộ bổ sung (FP), HR có thể hạ thấp threshold để tăng Recall.
+  \item Ngược lại, nếu ngân sách tăng lương/thưởng rất hạn chế, có thể nâng threshold để giảm FP, chỉ dồn nguồn lực giữ chân nhóm nhân sự có xác suất nghỉ việc ở mức báo động đỏ.
+\end{itemize}
+Do đó, mô hình Logistic Regression không chỉ cung cấp điểm dự đoán duy nhất, mà còn cho phép xây dựng \textit{đường cong lựa chọn threshold} phù hợp với các kịch bản kinh doanh khác nhau dựa trên cùng một bộ xác suất đầu ra.
+
+

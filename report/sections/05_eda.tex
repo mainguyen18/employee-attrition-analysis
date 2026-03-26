@@ -1,0 +1,38 @@
+\chapter{Phân tích khám phá (EDA)}
+
+\section{Tỷ lệ nghỉ việc theo nhóm}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.78\textwidth]{churn_rate_by_OverTime.png}
+  \caption{Tỷ lệ nghỉ việc theo OverTime}
+\end{figure}
+Từ biểu đồ tỷ lệ nghỉ việc theo biến OverTime (Làm thêm giờ), có thể quan sát thấy sự khác biệt vô cùng lớn. Những nhân viên phải làm thêm giờ (Yes) có tỷ lệ nghỉ việc cao hơn hẳn so với những người không phải làm thêm giờ. Điều này cho thấy áp lực công việc và sự mất cân bằng giữa cuộc sống riêng - công việc là động lực chính khiến nhân viên rời bỏ tổ chức. Biến này hứa hẹn sẽ có Odds Ratio rất cao trong mô hình logit.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.78\textwidth]{churn_rate_by_JobRole.png}
+  \caption{Tỷ lệ nghỉ việc theo JobRole}
+\end{figure}
+Biểu đồ phân tích theo vai trò công việc (JobRole) cho thấy sự biến động đáng kể giữa các bộ phận. Các vị trí như Sales Representative hoặc Laboratory Technician có xu hướng nghỉ việc cao hơn hẳn so với các vị trí cấp quản lý hoặc nghiên cứu như Manager, Research Director. Đặc trưng của mỗi vị trí mang theo mức độ căng thẳng, tính chất cạnh tranh và cơ hội thăng tiến khác nhau, góp phần giải thích quyết định ở lại hay ra đi của nhân viên.
+
+\section{Phân phối biến số theo quyết định nghỉ việc}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{dist_Age_by_churn.png}
+  \caption{Phân phối Age theo trạng thái nghỉ việc}
+\end{figure}
+Phân phối độ tuổi (Age) giữa nhóm nghỉ việc và nhóm ở lại cho thấy nhân viên trẻ tuổi (đặc biệt dưới 30) có xu hướng nghỉ việc cao hơn. Đường phân phối của nhóm nghỉ việc (màu đỏ/cam) dịch sang bên trái so với nhóm ở lại. Qua đó, có thể nhận định rằng nhân viên càng trẻ thì độ ổn định càng thấp, họ có thiên hướng tìm kiếm cơ hội hoặc nhảy việc nhiều hơn so với nhân viên lớn tuổi đã an bài sự nghiệp.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{dist_MonthlyIncome_by_churn.png}
+  \caption{Phân phối MonthlyIncome theo trạng thái nghỉ việc}
+\end{figure}
+Đối với thu nhập hàng tháng (MonthlyIncome), biểu đồ cho thấy những nhân viên đã nghỉ việc phần lớn tập trung ở vùng thu nhập thấp. Trong khi đó, nhóm ở lại có đường phân phối trải dài hơn về phía các mức lương cao. Chênh lệch này củng cố một thực tế hiển nhiên: lương bổng là một trong những cơ chế giữ chân hiệu quả nhất, và nhóm thu nhập thấp luôn đối mặt với cám dỗ chuyển việc cao nhất nhằm cải thiện tài chính.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{dist_YearsAtCompany_by_churn.png}
+  \caption{Phân phối YearsAtCompany theo trạng thái nghỉ việc}
+\end{figure}
+Thâm niên tại công ty (YearsAtCompany) cũng có phân phối khác biệt. Nhân viên có thâm niên ngắn (dưới 5 năm) chiếm phần lớn trong số các ca báo cáo nghỉ việc. Những ai vượt qua được cột mốc vài năm đầu thường có xu hướng gắn bó lâu dài hơn. Điều này gợi ý rằng quá trình hội nhập và đãi ngộ trong những năm đầu là mấu chốt để giảm tỷ lệ hao hụt nhân sự.

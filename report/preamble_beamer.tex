@@ -1,0 +1,87 @@
+% Preamble for Beamer presentation (Vietnamese)
+% Engine: pdfLaTeX hoặc XeLaTeX
+
+% Beamer class với theme và color scheme
+\usetheme{Warsaw}
+\usecolortheme{whale}
+\useinnertheme{rounded}
+\useoutertheme{infolines}
+
+% Custom color scheme
+\definecolor{mainblue}{RGB}{0,51,102}
+\definecolor{accentblue}{RGB}{0,102,204}
+\definecolor{mainred}{RGB}{204,0,51}
+\definecolor{maingreen}{RGB}{0,128,0}
+\setbeamercolor{structure}{fg=mainblue}
+\setbeamercolor{block title}{bg=mainblue,fg=white}
+\setbeamercolor{block body}{bg=blue!5,fg=black}
+\setbeamercolor{alerted text}{fg=mainred}
+
+% Font encoding cho tiếng Việt
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T5]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage[vietnamese]{babel}
+  \usepackage{vntex}
+\else
+  \usepackage{fontspec}
+  \defaultfontfeatures{Ligatures=TeX}
+  \setmainfont{Times New Roman}
+  \setsansfont{Arial}
+  \setmonofont{Consolas}
+\fi
+
+% Math packages
+\usepackage{amsmath,amssymb,mathtools}
+
+% Graphics
+\usepackage{graphicx}
+\graphicspath{{assets/figures/}}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+
+% Colors
+\usepackage{xcolor}
+
+% Hyperref
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  urlcolor=blue!60!black
+}
+
+% TikZ for diagrams
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+
+% Caption settings
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+
+
+% Beamer specific settings
+\setbeamertemplate{navigation symbols}{} % Remove navigation symbols
+\setbeamertemplate{footline}[frame number] % Show frame numbers
+
+% Spacing improvements
+\setlength{\parskip}{0.5em}
+\setbeamersize{text margin left=1em,text margin right=1em}
+
+% Item spacing
+\setlength{\leftmargini}{1.5em}
+\setlength{\itemindent}{0.5em}
+
+% Title page info (sẽ được override trong presentation.tex)
+\title{Nghiên cứu các yếu tố ảnh hưởng đến quyết định nghỉ việc của nhân viên}
+\subtitle{Tiếp cận bằng mô hình Hồi quy Logistic}
+\author{Nguyễn Thị Quỳnh Mai}
+\date{\today}
+
+% Vietnamese labels for Beamer
+\setbeamertemplate{caption}[numbered]
+

@@ -1,0 +1,84 @@
+% Preamble for Vietnamese LaTeX report
+% Engine: pdfLaTeX (mặc định). Nếu muốn, vẫn có thể build bằng XeLaTeX/LuaLaTeX.
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{iftex}
+\ifPDFTeX
+  % pdfLaTeX: dùng T5 + vntex để gõ tiếng Việt UTF-8 ổn định.
+  \usepackage[T5]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage[vietnamese]{babel}
+  \usepackage{vntex}
+\else
+  % XeLaTeX/LuaLaTeX: Unicode fonts qua fontspec.
+  \usepackage{fontspec}
+  \defaultfontfeatures{Ligatures=TeX}
+  \setmainfont{Times New Roman}
+  \setsansfont{Arial}
+  \setmonofont{Consolas}
+\fi
+
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{graphicx}
+% Prefer self-contained assets under report/assets.
+% Run: python report/tools/generate_report_assets.py
+\graphicspath{{assets/figures/}}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{microtype}
+
+\usepackage{tocloft}
+% Vietnamese names for lists
+\renewcommand{\listfigurename}{Danh sách hình}
+\renewcommand{\listtablename}{Danh sách bảng}
+
+% Make LoF/LoT more compact & readable
+\setlength{\cftbeforefigskip}{2pt}
+\setlength{\cftbeforetabskip}{2pt}
+\renewcommand{\cftdotsep}{1}
+\setlength{\cftfigindent}{0pt}
+\setlength{\cfttabindent}{0pt}
+
+% Giữ prefix mặc định (chỉ hiển thị số 4.1, 5.1, ...) để tránh lỗi ký tự,
+% chỉ tinh chỉnh spacing cho gọn.
+\setlength{\cftfignumwidth}{2.5em}
+\setlength{\cfttabnumwidth}{2.5em}
+
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  urlcolor=blue!60!black,
+  citecolor=blue!60!black
+}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Hồi quy Logistic cho churn ngân hàng}
+\rhead{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+% Avoid fancyhdr warning: \headheight too small
+\setlength{\headheight}{15pt}
+\addtolength{\topmargin}{-3pt}
+
+\usepackage{fancyvrb}
+\usepackage{longtable}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+
+\setlist[itemize]{topsep=2pt,itemsep=2pt,parsep=0pt}
+\setlist[enumerate]{topsep=2pt,itemsep=2pt,parsep=0pt}
+
+

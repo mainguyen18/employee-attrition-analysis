@@ -1,0 +1,55 @@
+% !TeX program = pdflatex
+% !TeX encoding = UTF-8
+\documentclass[aspectratio=169,12pt]{beamer}
+% aspectratio=169 cho màn hình rộng, có thể đổi thành 43 cho màn hình vuông
+
+\input{preamble_beamer}
+
+% Title information
+\title[Nghiên cứu Nghỉ việc NV]{Nghiên cứu các yếu tố ảnh hưởng đến quyết định nghỉ việc của nhân viên}
+\subtitle{Tiếp cận bằng mô hình Hồi quy Logistic}
+\author[N.T.Q. Mai]{Nguyễn Thị Quỳnh Mai}
+\date{\today}
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Outline
+\begin{frame}{Nội dung trình bày}
+  \tableofcontents
+\end{frame}
+
+% Sections
+\section{Tổng quan}
+\input{slides/01_overview}
+
+\section{Dữ liệu và phương pháp}
+\input{slides/02_data_method}
+
+\section{Kết quả EDA}
+\input{slides/03_eda}
+
+\section{Đánh giá mô hình}
+\input{slides/04_evaluation}
+
+\section{Odds Ratio và diễn giải}
+\input{slides/05_odds_ratio}
+
+\section{Kết luận}
+\input{slides/06_conclusion}
+
+% Thank you slide
+\begin{frame}
+  \centering
+  \vspace{2cm}
+  {\Large \textbf{Cảm ơn!}}\\[0.5cm]
+  {\large Câu hỏi và thảo luận}
+  \vfill
+\end{frame}
+
+\end{document}
+

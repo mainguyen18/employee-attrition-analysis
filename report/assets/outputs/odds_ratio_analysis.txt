@@ -1,0 +1,440 @@
+================================================================================
+PHÂN TÍCH CHI TIẾT ODDS RATIO - CÁC YẾU TỐ ẢNH HƯỞNG ĐẾN CHURN
+================================================================================
+
+
+================================================================================
+NHÂN KHẨU HỌC
+================================================================================
+
+[Age]
+   Odds Ratio: 0.9695
+   95% CI: [0.9441, 0.9956]
+   p-value: 2.2250e-02
+   Ý nghĩa thống kê: có ý nghĩa (p < 0.05)
+
+   [+] TÁC ĐỘNG: GIẢM odds churn
+   -> Độ mạnh: yếu
+   -> Ước lượng thay đổi: 3.05% (theo 1 đơn vị)
+
+[Gender_Male]
+   Odds Ratio: 1.4830
+   95% CI: [1.0328, 2.1295]
+   p-value: 3.2782e-02
+   Ý nghĩa thống kê: có ý nghĩa (p < 0.05)
+   Ghi chú: So với nhóm baseline (nhóm tham chiếu) của Gender.
+
+   [+] TÁC ĐỘNG: TĂNG odds churn
+   -> Độ mạnh: vừa phải
+   -> Ước lượng thay đổi: 48.30% (theo 1 đơn vị)
+
+
+================================================================================
+TÀI CHÍNH
+================================================================================
+
+[WorkLifeBalance]
+   Odds Ratio: 0.6895
+   95% CI: [0.5408, 0.8793]
+   p-value: 2.7250e-03
+   Ý nghĩa thống kê: cao (p < 0.01)
+
+   [+] TÁC ĐỘNG: GIẢM odds churn
+   -> Độ mạnh: vừa phải
+   -> Ước lượng thay đổi: 31.05% (theo 1 đơn vị)
+
+
+================================================================================
+KHÁC
+================================================================================
+
+[OverTime_Yes]
+   Odds Ratio: 7.2785
+   95% CI: [4.9777, 10.6429]
+   p-value: 1.3284e-24
+   Ý nghĩa thống kê: rất cao (p < 0.001)
+
+   [+] TÁC ĐỘNG: TĂNG odds churn
+   -> Độ mạnh: rất mạnh
+   -> Ước lượng thay đổi: 627.85% (theo 1 đơn vị)
+
+[EnvironmentSatisfaction]
+   Odds Ratio: 0.6476
+   95% CI: [0.5506, 0.7618]
+   p-value: 1.5587e-07
+   Ý nghĩa thống kê: rất cao (p < 0.001)
+
+   [+] TÁC ĐỘNG: GIẢM odds churn
+   -> Độ mạnh: vừa phải
+   -> Ước lượng thay đổi: 35.24% (theo 1 đơn vị)
+
+[NumCompaniesWorked]
+   Odds Ratio: 1.2174
+   95% CI: [1.1284, 1.3134]
+   p-value: 3.8138e-07
+   Ý nghĩa thống kê: rất cao (p < 0.001)
+
+   [+] TÁC ĐỘNG: TĂNG odds churn
+   -> Độ mạnh: vừa phải
+   -> Ước lượng thay đổi: 21.74% (theo 1 đơn vị)
+
+[JobSatisfaction]
+   Odds Ratio: 0.6614
+   95% CI: [0.5638, 0.7759]
+   p-value: 3.8446e-07
+   Ý nghĩa thống kê: rất cao (p < 0.001)
+
+   [+] TÁC ĐỘNG: GIẢM odds churn
+   -> Độ mạnh: vừa phải
+   -> Ước lượng thay đổi: 33.86% (theo 1 đơn vị)
+
+[BusinessTravel_Travel_Frequently]
+   Odds Ratio: 6.7167
+   95% CI: [2.9945, 15.0656]
+   p-value: 3.8177e-06
+   Ý nghĩa thống kê: rất cao (p < 0.001)
+
+   [+] TÁC ĐỘNG: TĂNG odds churn
+   -> Độ mạnh: rất mạnh
+   -> Ước lượng thay đổi: 571.67% (theo 1 đơn vị)
+
+[JobInvolvement]
+   Odds Ratio: 0.5892
+   95% CI: [0.4635, 0.7488]
+   p-value: 1.5310e-05
+   Ý nghĩa thống kê: rất cao (p < 0.001)
+
+   [+] TÁC ĐỘNG: GIẢM odds churn
+   -> Độ mạnh: vừa phải
+   -> Ước lượng thay đổi: 41.08% (theo 1 đơn vị)
+
+[DistanceFromHome]
+   Odds Ratio: 1.0465
+   95% CI: [1.0246, 1.0688]
+   p-value: 2.4401e-05
+   Ý nghĩa thống kê: rất cao (p < 0.001)
+
+   [+] TÁC ĐỘNG: TĂNG odds churn
+   -> Độ mạnh: yếu
+   -> Ước lượng thay đổi: 4.65% (theo 1 đơn vị)
+
+[YearsSinceLastPromotion]
+   Odds Ratio: 1.1915
+   95% CI: [1.0969, 1.2943]
+   p-value: 3.3065e-05
+   Ý nghĩa thống kê: rất cao (p < 0.001)
+
+   [+] TÁC ĐỘNG: TĂNG odds churn
+   -> Độ mạnh: yếu
+   -> Ước lượng thay đổi: 19.15% (theo 1 đơn vị)
+
+[JobRole_Sales Representative]
+   Odds Ratio: 7.1923
+   95% CI: [2.4411, 21.1910]
+   p-value: 3.4527e-04
+   Ý nghĩa thống kê: rất cao (p < 0.001)
+
+   [+] TÁC ĐỘNG: TĂNG odds churn
+   -> Độ mạnh: rất mạnh
+   -> Ước lượng thay đổi: 619.23% (theo 1 đơn vị)
+
+[MaritalStatus_Single]
+   Odds Ratio: 3.1158
+   95% CI: [1.5833, 6.1315]
+   p-value: 1.0008e-03
+   Ý nghĩa thống kê: cao (p < 0.01)
+
+   [+] TÁC ĐỘNG: TĂNG odds churn
+   -> Độ mạnh: rất mạnh
+   -> Ước lượng thay đổi: 211.58% (theo 1 đơn vị)
+
+[YearsInCurrentRole]
+   Odds Ratio: 0.8644
+   95% CI: [0.7910, 0.9446]
+   p-value: 1.2871e-03
+   Ý nghĩa thống kê: cao (p < 0.01)
+
+   [+] TÁC ĐỘNG: GIẢM odds churn
+   -> Độ mạnh: yếu
+   -> Ước lượng thay đổi: 13.56% (theo 1 đơn vị)
+
+[RelationshipSatisfaction]
+   Odds Ratio: 0.7748
+   95% CI: [0.6593, 0.9105]
+   p-value: 1.9446e-03
+   Ý nghĩa thống kê: cao (p < 0.01)
+
+   [+] TÁC ĐỘNG: GIẢM odds churn
+   -> Độ mạnh: vừa phải
+   -> Ước lượng thay đổi: 22.52% (theo 1 đơn vị)
+
+[JobRole_Laboratory Technician]
+   Odds Ratio: 4.3769
+   95% CI: [1.6963, 11.2937]
+   p-value: 2.2682e-03
+   Ý nghĩa thống kê: cao (p < 0.01)
+
+   [+] TÁC ĐỘNG: TĂNG odds churn
+   -> Độ mạnh: rất mạnh
+   -> Ước lượng thay đổi: 337.69% (theo 1 đơn vị)
+
+[YearsWithCurrManager]
+   Odds Ratio: 0.8763
+   95% CI: [0.7991, 0.9610]
+   p-value: 5.0365e-03
+   Ý nghĩa thống kê: cao (p < 0.01)
+
+   [+] TÁC ĐỘNG: GIẢM odds churn
+   -> Độ mạnh: yếu
+   -> Ước lượng thay đổi: 12.37% (theo 1 đơn vị)
+
+[BusinessTravel_Travel_Rarely]
+   Odds Ratio: 2.7766
+   95% CI: [1.3189, 5.8454]
+   p-value: 7.1717e-03
+   Ý nghĩa thống kê: cao (p < 0.01)
+
+   [+] TÁC ĐỘNG: TĂNG odds churn
+   -> Độ mạnh: rất mạnh
+   -> Ước lượng thay đổi: 177.66% (theo 1 đơn vị)
+
+[TrainingTimesLastYear]
+   Odds Ratio: 0.8295
+   95% CI: [0.7190, 0.9570]
+   p-value: 1.0410e-02
+   Ý nghĩa thống kê: có ý nghĩa (p < 0.05)
+
+   [+] TÁC ĐỘNG: GIẢM odds churn
+   -> Độ mạnh: yếu
+   -> Ước lượng thay đổi: 17.05% (theo 1 đơn vị)
+
+[YearsAtCompany]
+   Odds Ratio: 1.0944
+   95% CI: [1.0148, 1.1803]
+   p-value: 1.9232e-02
+   Ý nghĩa thống kê: có ý nghĩa (p < 0.05)
+
+   [+] TÁC ĐỘNG: TĂNG odds churn
+   -> Độ mạnh: yếu
+   -> Ước lượng thay đổi: 9.44% (theo 1 đơn vị)
+
+[JobRole_Sales Executive]
+   Odds Ratio: 2.7824
+   95% CI: [1.1577, 6.6869]
+   p-value: 2.2176e-02
+   Ý nghĩa thống kê: có ý nghĩa (p < 0.05)
+
+   [+] TÁC ĐỘNG: TĂNG odds churn
+   -> Độ mạnh: rất mạnh
+   -> Ước lượng thay đổi: 178.24% (theo 1 đơn vị)
+
+[TotalWorkingYears]
+   Odds Ratio: 0.9409
+   95% CI: [0.8885, 0.9964]
+   p-value: 3.7098e-02
+   Ý nghĩa thống kê: có ý nghĩa (p < 0.05)
+
+   [+] TÁC ĐỘNG: GIẢM odds churn
+   -> Độ mạnh: yếu
+   -> Ước lượng thay đổi: 5.91% (theo 1 đơn vị)
+
+[JobRole_Human Resources]
+   Odds Ratio: 3.7587
+   95% CI: [0.9984, 14.1499]
+   p-value: 5.0271e-02
+   Ý nghĩa thống kê: không có ý nghĩa thống kê (p >= 0.05)
+
+   [!] KHÔNG CÓ Ý NGHĨA THỐNG KÊ
+   -> Không có bằng chứng thống kê rằng biến này ảnh hưởng churn.
+
+[StockOptionLevel]
+   Odds Ratio: 0.8069
+   95% CI: [0.5926, 1.0986]
+   p-value: 1.7299e-01
+   Ý nghĩa thống kê: không có ý nghĩa thống kê (p >= 0.05)
+
+   [!] KHÔNG CÓ Ý NGHĨA THỐNG KÊ
+   -> Không có bằng chứng thống kê rằng biến này ảnh hưởng churn.
+
+[DailyRate]
+   Odds Ratio: 0.9997
+   95% CI: [0.9993, 1.0001]
+   p-value: 1.9833e-01
+   Ý nghĩa thống kê: không có ý nghĩa thống kê (p >= 0.05)
+
+   [!] KHÔNG CÓ Ý NGHĨA THỐNG KÊ
+   -> Không có bằng chứng thống kê rằng biến này ảnh hưởng churn.
+
+[MaritalStatus_Married]
+   Odds Ratio: 1.3812
+   95% CI: [0.8185, 2.3308]
+   p-value: 2.2636e-01
+   Ý nghĩa thống kê: không có ý nghĩa thống kê (p >= 0.05)
+
+   [!] KHÔNG CÓ Ý NGHĨA THỐNG KÊ
+   -> Không có bằng chứng thống kê rằng biến này ảnh hưởng churn.
+
+[JobRole_Research Director]
+   Odds Ratio: 0.3420
+   95% CI: [0.0477, 2.4521]
+   p-value: 2.8572e-01
+   Ý nghĩa thống kê: không có ý nghĩa thống kê (p >= 0.05)
+
+   [!] KHÔNG CÓ Ý NGHĨA THỐNG KÊ
+   -> Không có bằng chứng thống kê rằng biến này ảnh hưởng churn.
+
+[JobRole_Research Scientist]
+   Odds Ratio: 1.6960
+   95% CI: [0.6427, 4.4752]
+   p-value: 2.8596e-01
+   Ý nghĩa thống kê: không có ý nghĩa thống kê (p >= 0.05)
+
+   [!] KHÔNG CÓ Ý NGHĨA THỐNG KÊ
+   -> Không có bằng chứng thống kê rằng biến này ảnh hưởng churn.
+
+[EducationField_Medical]
+   Odds Ratio: 0.5117
+   95% CI: [0.1162, 2.2529]
+   p-value: 3.7560e-01
+   Ý nghĩa thống kê: không có ý nghĩa thống kê (p >= 0.05)
+
+   [!] KHÔNG CÓ Ý NGHĨA THỐNG KÊ
+   -> Không có bằng chứng thống kê rằng biến này ảnh hưởng churn.
+
+[EducationField_Other]
+   Odds Ratio: 0.5203
+   95% CI: [0.1036, 2.6134]
+   p-value: 4.2756e-01
+   Ý nghĩa thống kê: không có ý nghĩa thống kê (p >= 0.05)
+
+   [!] KHÔNG CÓ Ý NGHĨA THỐNG KÊ
+   -> Không có bằng chứng thống kê rằng biến này ảnh hưởng churn.
+
+[EducationField_Life Sciences]
+   Odds Ratio: 0.5638
+   95% CI: [0.1280, 2.4821]
+   p-value: 4.4854e-01
+   Ý nghĩa thống kê: không có ý nghĩa thống kê (p >= 0.05)
+
+   [!] KHÔNG CÓ Ý NGHĨA THỐNG KÊ
+   -> Không có bằng chứng thống kê rằng biến này ảnh hưởng churn.
+
+[PercentSalaryHike]
+   Odds Ratio: 0.9783
+   95% CI: [0.9059, 1.0564]
+   p-value: 5.7545e-01
+   Ý nghĩa thống kê: không có ý nghĩa thống kê (p >= 0.05)
+
+   [!] KHÔNG CÓ Ý NGHĨA THỐNG KÊ
+   -> Không có bằng chứng thống kê rằng biến này ảnh hưởng churn.
+
+[EducationField_Technical Degree]
+   Odds Ratio: 1.4123
+   95% CI: [0.3072, 6.4929]
+   p-value: 6.5736e-01
+   Ý nghĩa thống kê: không có ý nghĩa thống kê (p >= 0.05)
+
+   [!] KHÔNG CÓ Ý NGHĨA THỐNG KÊ
+   -> Không có bằng chứng thống kê rằng biến này ảnh hưởng churn.
+
+[JobRole_Manufacturing Director]
+   Odds Ratio: 1.2463
+   95% CI: [0.4387, 3.5405]
+   p-value: 6.7940e-01
+   Ý nghĩa thống kê: không có ý nghĩa thống kê (p >= 0.05)
+
+   [!] KHÔNG CÓ Ý NGHĨA THỐNG KÊ
+   -> Không có bằng chứng thống kê rằng biến này ảnh hưởng churn.
+
+[MonthlyRate]
+   Odds Ratio: 1.0000
+   95% CI: [1.0000, 1.0000]
+   p-value: 6.8325e-01
+   Ý nghĩa thống kê: không có ý nghĩa thống kê (p >= 0.05)
+
+   [!] KHÔNG CÓ Ý NGHĨA THỐNG KÊ
+   -> Không có bằng chứng thống kê rằng biến này ảnh hưởng churn.
+
+[PerformanceRating]
+   Odds Ratio: 1.1346
+   95% CI: [0.5197, 2.4772]
+   p-value: 7.5123e-01
+   Ý nghĩa thống kê: không có ý nghĩa thống kê (p >= 0.05)
+
+   [!] KHÔNG CÓ Ý NGHĨA THỐNG KÊ
+   -> Không có bằng chứng thống kê rằng biến này ảnh hưởng churn.
+
+[JobLevel]
+   Odds Ratio: 0.9135
+   95% CI: [0.4914, 1.6981]
+   p-value: 7.7482e-01
+   Ý nghĩa thống kê: không có ý nghĩa thống kê (p >= 0.05)
+
+   [!] KHÔNG CÓ Ý NGHĨA THỐNG KÊ
+   -> Không có bằng chứng thống kê rằng biến này ảnh hưởng churn.
+
+[HourlyRate]
+   Odds Ratio: 1.0011
+   95% CI: [0.9925, 1.0098]
+   p-value: 8.0850e-01
+   Ý nghĩa thống kê: không có ý nghĩa thống kê (p >= 0.05)
+
+   [!] KHÔNG CÓ Ý NGHĨA THỐNG KÊ
+   -> Không có bằng chứng thống kê rằng biến này ảnh hưởng churn.
+
+[EducationField_Marketing]
+   Odds Ratio: 0.8415
+   95% CI: [0.1737, 4.0775]
+   p-value: 8.3032e-01
+   Ý nghĩa thống kê: không có ý nghĩa thống kê (p >= 0.05)
+
+   [!] KHÔNG CÓ Ý NGHĨA THỐNG KÊ
+   -> Không có bằng chứng thống kê rằng biến này ảnh hưởng churn.
+
+[JobRole_Manager]
+   Odds Ratio: 1.1686
+   95% CI: [0.2495, 5.4729]
+   p-value: 8.4325e-01
+   Ý nghĩa thống kê: không có ý nghĩa thống kê (p >= 0.05)
+
+   [!] KHÔNG CÓ Ý NGHĨA THỐNG KÊ
+   -> Không có bằng chứng thống kê rằng biến này ảnh hưởng churn.
+
+[MonthlyIncome]
+   Odds Ratio: 1.0000
+   95% CI: [0.9999, 1.0002]
+   p-value: 8.9115e-01
+   Ý nghĩa thống kê: không có ý nghĩa thống kê (p >= 0.05)
+
+   [!] KHÔNG CÓ Ý NGHĨA THỐNG KÊ
+   -> Không có bằng chứng thống kê rằng biến này ảnh hưởng churn.
+
+[Education]
+   Odds Ratio: 1.0025
+   95% CI: [0.8442, 1.1905]
+   p-value: 9.7686e-01
+   Ý nghĩa thống kê: không có ý nghĩa thống kê (p >= 0.05)
+
+   [!] KHÔNG CÓ Ý NGHĨA THỐNG KÊ
+   -> Không có bằng chứng thống kê rằng biến này ảnh hưởng churn.
+
+
+================================================================================
+TÓM TẮT: CÁC YẾU TỐ ẢNH HƯỞNG MẠNH NHẤT (p < 0.05, CI không chứa 1)
+================================================================================
+
+[+] Yếu tố bảo vệ (giảm churn):
+   - JobInvolvement: OR=0.589 (95%CI 0.464–0.749, p=1.53e-05)
+   - EnvironmentSatisfaction: OR=0.648 (95%CI 0.551–0.762, p=1.56e-07)
+   - JobSatisfaction: OR=0.661 (95%CI 0.564–0.776, p=3.84e-07)
+   - WorkLifeBalance: OR=0.690 (95%CI 0.541–0.879, p=2.72e-03)
+   - RelationshipSatisfaction: OR=0.775 (95%CI 0.659–0.911, p=1.94e-03)
+
+[!] Yếu tố rủi ro (tăng churn):
+   - OverTime_Yes: OR=7.279 (95%CI 4.978–10.643, p=1.33e-24)
+   - JobRole_Sales Representative: OR=7.192 (95%CI 2.441–21.191, p=3.45e-04)
+   - BusinessTravel_Travel_Frequently: OR=6.717 (95%CI 2.995–15.066, p=3.82e-06)
+   - JobRole_Laboratory Technician: OR=4.377 (95%CI 1.696–11.294, p=2.27e-03)
+   - MaritalStatus_Single: OR=3.116 (95%CI 1.583–6.132, p=1.00e-03)
+
+Khuyến nghị: ưu tiên can thiệp vào các biến vừa có ý nghĩa thống kê vừa có hiệu ứng lớn (|OR-1| lớn).

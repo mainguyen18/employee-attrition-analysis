@@ -1,0 +1,55 @@
+% Model Evaluation slides
+\begin{frame}{Kết quả đánh giá mô hình}
+  \centering
+  \begin{tabular}{lcc}
+    \toprule
+    \textbf{Metric} & \textbf{Giá trị} & \textbf{Ý nghĩa} \\
+    \midrule
+    \textcolor{accentblue}{\textbf{ROC AUC}} & \Large \textbf{0.8031} & Phân biệt tốt, vượt mức ngẫu nhiên xa \\
+    \textcolor{accentblue}{\textbf{Recall}} & \Large \textbf{0.6383} & Tóm được khoản 64\% sự cố \\
+    Accuracy & 0.7517 & Độ chính xác chung \\
+    Precision & 0.3488 & Hiệu suất trong cảnh báo \\
+    F1 & 0.4511 & Cân bằng Precision/Recall \\
+    \bottomrule
+  \end{tabular}
+\end{frame}
+
+\begin{frame}{Đánh giá mô hình - Diễn giải}
+  \begin{alertblock}{}
+    Mô hình ưu tiên \textbf{Recall} (hạn chế bỏ sót nhân tài) - phù hợp với mục tiêu nhân sự
+  \end{alertblock}
+  
+  \vspace{0.4cm}
+  \textbf{Ý nghĩa đánh đổi (Trade-off):}
+  \begin{itemize}
+    \item Nếu mất nhân sự tốn $\gg$ chi phí một buổi trò chuyện, ta cần giữ threshold thấp (như 0.5) để tối đa Recall.
+    \item Mô hình chấp nhận một tỷ lệ nhất định báo động ảo (False Positive) để đánh đổi sự an toàn trong quản trị nhân lực.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{ROC Curve}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.65\textwidth]{roc_curve.png}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Confusion Matrix}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.55\textwidth]{confusion_matrix.png}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Confusion Matrix - Diễn giải}
+  \textbf{Phát hiện được khoảng 64\% nguy cơ (Recall = 0.638)}
+  
+  \vspace{0.4cm}
+  \textbf{Thành phần:}
+  \begin{itemize}
+    \item \textbf{True Positive (TP)}: Nhân viên nghỉ việc được phát hiện và HR có thể cứu vãn
+    \item \textbf{False Negative (FN)}: Chảy máu chất xám do hệ thống bỏ sót
+    \item \textbf{False Positive (FP)}: Tốn kém dư thừa cho nhân viên không có ý định nghỉ
+    \item \textbf{True Negative (TN)}: Quản trị phần đông người tại vị an toàn
+  \end{itemize}
+\end{frame}

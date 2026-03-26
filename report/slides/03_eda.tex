@@ -1,0 +1,50 @@
+% EDA slides
+\begin{frame}{Tỷ lệ nghỉ việc theo OverTime}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{churn_rate_by_OverTime.png}
+  \end{figure}
+  
+  \vspace{0.4cm}
+  \textbf{Quan sát:} Sự chênh lệch khổng lồ. Nhân viên "Yes" (Phải làm thêm giờ) có khả năng rời bỏ cao gấp nhiều lần.
+\end{frame}
+
+\begin{frame}{Tỷ lệ nghỉ việc theo JobRole}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{churn_rate_by_JobRole.png}
+  \end{figure}
+  
+  \vspace{0.4cm}
+  \textbf{Quan sát:} \textcolor{mainred}{\textbf{Sales Representative}} và \textbf{Laboratory Technician} đang bị ảnh hưởng luân chuyển nhân sự nghiêm trọng.
+\end{frame}
+
+\begin{frame}{Phân phối Age theo trạng thái nghỉ việc}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.65\textwidth]{dist_Age_by_churn.png}
+  \end{figure}
+  
+  \vspace{0.4cm}
+  \textbf{Quan sát:} Cá nhân rời công ty thường có \textcolor{mainred}{\textbf{tuổi đời trẻ hơn hẳn}} (đỉnh nhọn tại độ tuổi $<$ 30).
+\end{frame}
+
+\begin{frame}{Phân phối MonthlyIncome theo trạng thái nghỉ việc}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.65\textwidth]{dist_MonthlyIncome_by_churn.png}
+  \end{figure}
+  
+  \vspace{0.4cm}
+  \textbf{Quan sát:} Nhóm nghỉ việc thường rơi vào vùng có thu nhập rất lẹt đẹt. Những người thu nhập cao hầu như ở lại.
+\end{frame}
+
+\begin{frame}{Phân phối YearsAtCompany theo trạng thái nghỉ việc}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.65\textwidth]{dist_YearsAtCompany_by_churn.png}
+  \end{figure}
+  
+  \vspace{0.4cm}
+  \textbf{Quan sát:} Những năm đầu (dưới 5 năm) là giai đoạn dễ bỏ cuộc nhất. Nếu vượt qua hạn mức đó, xác suất ở lại sẽ cải thiện.
+\end{frame}

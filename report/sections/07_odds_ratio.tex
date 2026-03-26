@@ -1,0 +1,67 @@
+\chapter{Suy luận thống kê: Odds Ratio (OR)}
+
+\section{Từ hệ số \texorpdfstring{$\beta$}{beta} đến Odds Ratio}
+Trong mô hình logit:
+\[
+\log\left(\frac{p}{1-p}\right) = \beta_0 + \sum_{j=1}^{d}\beta_j x_j.
+\]
+Với mỗi biến \(x_j\), \textit{Odds Ratio} (tỷ số odds) được định nghĩa:
+\[
+OR_j = \exp(\beta_j).
+\]
+Diễn giải: nếu tăng \(x_j\) thêm 1 đơn vị (giữ các biến khác không đổi), odds nghỉ việc sẽ nhân với \(OR_j\).
+
+\section{Kiểm định giả thuyết cho từng hệ số}
+Khi báo cáo p-value cho từng hệ số \(\beta_j\), ta thực chất đang kiểm định:
+\[
+H_0: \beta_j = 0 \quad \Leftrightarrow \quad OR_j = 1
+\]
+chống lại giả thuyết đối:
+\[
+H_1: \beta_j \neq 0 \quad \Leftrightarrow \quad OR_j \neq 1.
+\]
+Với mức ý nghĩa \(\alpha = 0.05\), nếu p-value \(< \alpha\) thì bác bỏ \(H_0\), kết luận biến \(x_j\) có ý nghĩa thống kê (tác động đáng kể lên log-odds nghỉ việc); ngược lại, không đủ bằng chứng để khẳng định biến đó khác 0 trong mô hình hiện tại.
+
+\section{Baseline (nhóm tham chiếu) cho biến phân loại}
+Do categorical được dummy hoá theo cơ chế \textit{drop-first} (loại một nhóm làm baseline), các biến:
+\begin{itemize}
+  \item \texttt{OverTime\_Yes} được hiểu \textbf{so với baseline OverTime\_No}.
+  \item \texttt{Gender\_Male} được hiểu \textbf{so với baseline Gender\_Female}.
+  \item Các JobRole (như \texttt{JobRole\_Sales Representative}) so với \textbf{baseline JobRole}.
+\end{itemize}
+
+\section{Bảng OR và Forest plot}
+\input{tables/odds_ratio_table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{forest_plot_odds_ratio.png}
+  \caption{Forest plot Odds Ratio}
+\end{figure}
+
+\noindent
+Trong bảng OR, mỗi dòng tương ứng với một biến (hoặc nhóm tham chiếu dummy) trong mô hình logit.
+Forest plot trực quan hoá cùng một thông tin: trục hoành ở thang log hoặc thang OR, với điểm giữa là OR ước lượng, đoạn thẳng ngang biểu diễn 95\% CI và đường dọc tại OR = 1 là ranh giới ``không hiệu ứng''. Các biến có đoạn CI không cắt qua 1 và nằm xa về một phía thể hiện tác động mạnh và ổn định lên quyết định nghỉ việc.
+
+\section{Một số điểm diễn giải trọng tâm}
+\begin{itemize}
+  \item \textbf{OverTime\_Yes}: OR cực kỳ cao (quanh mức 7.2). Nghĩa là nhân viên phải làm thêm giờ có odds nghỉ việc cao gấp $\approx$ 7 lần so với người không làm thêm giờ (với các điều kiện khác không đổi).
+  \item \textbf{JobRole\_Sales Representative}: OR cao (quanh 7.1), cho thấy rủi ro nghỉ việc đặc thù rất lớn ở vị trí nhân viên bán hàng.
+  \item \textbf{EnvironmentSatisfaction}: OR $\approx$ 0.64. Tăng 1 điểm hài lòng về môi trường làm việc làm giảm $36\%$ odds nghỉ việc.
+  \item \textbf{JobInvolvement}: OR $\approx$ 0.58. Sự gắn kết với công việc tăng lên giúp giữ chân nhân viên hiệu quả.
+\end{itemize}
+
+\noindent
+Nhìn tổng thể bảng OR, có thể nhóm các biến thành hai loại chính: (i) \textit{yếu tố rủi ro} với OR $>$ 1 làm tăng odds nghỉ việc (OverTime, Sales Representative, DistanceFromHome), và (ii) \textit{yếu tố bảo vệ} với OR $<$ 1 làm giảm odds nghỉ việc (EnvironmentSatisfaction, JobInvolvement, RelationshipSatisfaction). Các biến liên tục như \texttt{MonthlyIncome} có OR rất gần 1 vì đơn vị tính là 1 USD; trên thực tế, tác động biên của 1000 USD sẽ lớn hơn rất nhiều.
+
+Các yếu tố như OverTime và EnvironmentSatisfaction đều có p-value cực nhỏ, cho thấy ảnh hưởng của chúng lên quyết định nghỉ việc là vô cùng ổn định. Từ góc độ nghiệp vụ (HR), \textit{OverTime} là chỉ báo rủi ro cần được giám sát nghiêm ngặt, trong khi việc nâng cao \textit{EnvironmentSatisfaction} là đòn bẩy chính sách lâu dài.
+
+\section{Phương trình logit ước lượng}
+Về mặt lý thuyết, mô hình logit giả định rằng log-odds nghỉ việc là một hàm tuyến tính lập trên ma trận thiết kế đã dummy hoá:
+\[
+\log\left(\frac{p}{1-p}\right) = \beta_0 + \sum_{j=1}^{d}\beta_j x_j.
+\]
+Các hệ số $\hat{\beta}_j$ chính là $\ln(OR_j)$. Vì số lượng biến quá lớn, việc trình bày toàn bộ phương trình sẽ gây loãng thông tin. Bảng Odds Ratio phía trên và \texttt{assets/outputs/logit\_summary.txt} cung cấp đầy đủ bức tranh định lượng để tra cứu hệ số chính xác. Một nhân viên có $x_j$ nhất định sẽ có xác suất rời công ty được tính qua:
+\[
+p = \sigma(\text{logit}) = \frac{1}{1 + e^{-\text{logit}}}.
+\]

@@ -1,0 +1,100 @@
+\chapter{Phương pháp (Methodology)}
+
+\section{Logistic Regression}
+\subsection{Mô hình xác suất}
+Với vector đặc trưng \(x \in \mathbb{R}^d\), mô hình Logistic Regression ước lượng xác suất churn:
+\[
+p(y=1\mid x) = \sigma(z) = \frac{1}{1+e^{-z}},\quad z = \beta_0 + \beta^\top x.
+\]
+Dạng logit (log-odds):
+\[
+\log\left(\frac{p}{1-p}\right) = \beta_0 + \beta^\top x.
+\]
+
+\subsection{Lựa chọn hàm liên kết logit và cơ sở mô hình}
+Trong bối cảnh biến mục tiêu nhị phân \(y \in \{0,1\}\), điều quan trọng là mô hình phải đảm bảo \(p(y=1\mid x)\) luôn nằm trong khoảng \((0,1)\). Hàm logistic \(\sigma(z) = 1/(1+e^{-z})\) được sử dụng vì:
+\begin{itemize}
+  \item \(\sigma(z)\) luôn cho giá trị trong \((0,1)\) cho mọi \(z \in \mathbb{R}\), do đó phù hợp để biểu diễn xác suất.
+  \item Hàm logit \(\log\left(\frac{p}{1-p}\right)\) tuyến tính theo \(x\), cho phép dùng cùng một khung tuyến tính quen thuộc như trong hồi quy tuyến tính nhưng ở không gian log-odds, giúp việc suy luận và kiểm định trở nên đơn giản và có diễn giải rõ ràng.
+\end{itemize}
+Từ góc nhìn xác suất, nếu giả sử các quan sát độc lập và \(y_i \sim \text{Bernoulli}(p_i)\) với \(p_i = \sigma(\beta_0 + \beta^\top x_i)\), thì log-likelihood của toàn bộ mẫu chính là tổng log xác suất Bernoulli, dẫn tới dạng hàm mục tiêu ở phần tiếp theo.
+\subsection{Lý do lựa chọn Logistic Regression cho bài toán dự đoán nhân sự}
+Với biến mục tiêu nhị phân và yêu cầu cao về khả năng diễn giải (giải thích được chiều và độ lớn ảnh hưởng của từng yếu tố lên xác suất nghỉ việc), Logistic Regression là lựa chọn tự nhiên: 
+ (i) mô hình trực tiếp ước lượng xác suất \(p(y=1\mid x)\) thay vì chỉ cho ra nhãn cứng, 
+ (ii) hệ số \(\beta_j\) có thể được chuyển hoá thành Odds Ratio để diễn giải bằng ngôn ngữ thống kê quen thuộc, 
+và (iii) cấu trúc tuyến tính trong log-odds giúp việc kiểm định giả thuyết, báo cáo p-value và khoảng tin cậy trở nên chuẩn hoá. 
+So với các mô hình phi tuyến phức tạp (như cây quyết định sâu, boosting,\ldots), Logistic Regression mang lại sự cân bằng tốt giữa hiệu năng dự đoán và tính minh bạch, phù hợp với mục tiêu của báo cáo là vừa dự đoán được khả năng rời đi của nhân sự, vừa rút ra được insight định lượng cho đội ngũ quản lý nhân sự (HR).
+
+\subsection{Hàm mục tiêu và regularization}
+Mô hình thường tối ưu \textit{Negative Log-Likelihood (NLL)} (âm log-likelihood) và có thể thêm \(\ell_2\) regularization (phạt \(\ell_2\)):
+\[
+\mathcal{L}(\beta) = -\sum_{i=1}^{n}\Big[y_i\log p_i + (1-y_i)\log(1-p_i)\Big] + \lambda \|\beta\|_2^2.
+\]
+\noindent
+Phần đầu của biểu thức trên chính là tổng âm log-likelihood của các biến Bernoulli độc lập, tương ứng với việc tìm \(\beta\) sao cho phân bố xác suất mô hình hoá ``giống'' dữ liệu quan sát nhất (theo nghĩa Maximum Likelihood). Hạng tử \(\lambda \|\beta\|_2^2\) đóng vai trò regularization: phạt các nghiệm có hệ số quá lớn, giúp giảm overfitting và ổn định ước lượng trong trường hợp các biến có tương quan hoặc thang đo khác nhau. Trong triển khai bằng \texttt{sklearn}, tham số \(\lambda\) này được mã hoá gián tiếp thông qua tham số nghịch đảo \texttt{C} (C lớn tương ứng với regularization yếu, C nhỏ tương ứng với regularization mạnh).
+
+\subsection{Phân biệt hai vai trò: sklearn Logistic Regression và statsmodels Logit}
+
+Trong nghiên cứu này, hai hiện thực khác nhau của mô hình logit được sử dụng song song, phục vụ hai mục đích bổ sung cho nhau:
+
+\begin{itemize}
+  \item \textbf{sklearn LogisticRegression} được sử dụng trong \textit{pipeline dự đoán} (prediction pipeline). 
+  Mô hình này được tích hợp với \textit{ColumnTransformer} và \textit{StandardScaler} để tạo thành một quy trình huấn luyện--suy luận thống nhất, dễ lưu trữ bằng \texttt{joblib} và triển khai lại trên dữ liệu mới. 
+  Trọng tâm ở đây là \textit{hiệu năng dự đoán} (predictive performance) thông qua các chỉ số như ROC AUC, Recall và F1.
+  \item \textbf{statsmodels Logit} được sử dụng trong \textit{mô-đun suy luận thống kê} (statistical inference). 
+  Thay vì ưu tiên tốc độ dự đoán, Statsmodels cung cấp đầy đủ bảng tóm tắt hệ số ước lượng, sai số chuẩn, thống kê kiểm định và \textit{p-value}, cho phép diễn giải từng hệ số \(\beta_j\) dưới dạng \textit{Odds Ratio} cùng khoảng tin cậy 95\%. 
+  Đây là cơ sở để kết nối mô hình với lập luận thống kê và biện luận học thuật trong luận văn.
+\end{itemize}
+
+Cách tiếp cận hai tầng (prediction bằng sklearn và inference bằng Statsmodels) giúp tách bạch giữa mục tiêu \textit{dự đoán tốt} và mục tiêu \textit{diễn giải sâu}, đồng thời giữ cho kiến trúc hệ thống phân tích được trong sáng và dễ bảo trì.
+
+\section{Tiền xử lý (Preprocessing)}
+Thiết kế tiền xử lý theo \textit{sklearn pipeline} (pipeline của sklearn):
+\begin{itemize}
+  \item \textbf{OneHotEncoder} (mã hoá one-hot) cho biến phân loại.
+  \item \textbf{StandardScaler} (chuẩn hoá) cho biến số để ổn định tối ưu khi có regularization.
+\end{itemize}
+\noindent
+Việc tách riêng bước tiền xử lý trong một \textit{ColumnTransformer} giúp áp dụng đúng phép biến đổi tương ứng cho từng nhóm biến (one-hot cho categorical, chuẩn hoá cho numeric) một cách có hệ thống và tái lập. Đồng thời, khi ghép \textit{preprocessor} với Logistic Regression vào cùng một \textit{sklearn Pipeline}, toàn bộ quy trình ``chuẩn hoá $\rightarrow$ mã hoá $\rightarrow$ ước lượng xác suất'' được đóng gói thành một đối tượng duy nhất, tránh sai sót do áp dụng thiếu/nhầm bước tiền xử lý khi dự đoán trên dữ liệu mới và thuận tiện cho việc lưu trữ triển khai.
+
+\section{Thiết kế thí nghiệm}
+\begin{itemize}
+  \item \textbf{Train/Test split} (chia tập train/test) dạng stratified (chia có phân tầng) để giữ tỷ lệ churn tương đồng giữa train và test.
+  \item \textbf{Decision threshold} (ngưỡng quyết định) mặc định 0.5 để chuyển xác suất thành nhãn dự đoán; có thể tối ưu theo trade-off Recall/Precision.
+\end{itemize}
+Chiến lược chia tập train/test có phân tầng đảm bảo rằng tỷ lệ nghỉ việc trong tập huấn luyện và tập kiểm tra gần như tương đương với tỷ lệ gốc của toàn bộ dữ liệu, giúp đánh giá mô hình khách quan hơn, tránh các trường hợp tập test vô tình quá mất cân bằng. Ngưỡng quyết định ban đầu được đặt ở mức 0.5 như một chuẩn khởi điểm tự nhiên; sau đó, việc phân tích đường cong ROC và confusion matrix cho phép điều chỉnh threshold theo các kịch bản ưu tiên Recall hay Precision khác nhau, phù hợp hơn với yêu cầu chi phí và mục tiêu đánh giá nhân sự.
+
+\section{Luồng xử lý tổng quát}
+Quy trình phân tích được triển khai theo một luồng xử lý nhất quán từ dữ liệu thô đến suy luận thống kê:
+\begin{enumerate}
+  \item \textbf{Nạp dữ liệu và kiểm tra cấu trúc}: đọc file \texttt{WA\_Fn-UseC\_-HR-Employee-Attrition.csv}, kiểm tra số quan sát, số biến, tỷ lệ nghỉ việc và tình trạng thiếu dữ liệu.
+  \item \textbf{Tiền xử lý và tách tập}: áp dụng đặc tả biến để tách \((X, y)\), xây dựng \textit{preprocessor} (one-hot + chuẩn hoá), sau đó chia train/test có phân tầng.
+  \item \textbf{Huấn luyện và đánh giá mô hình}: ghép \textit{preprocessor} với Logistic Regression trong một \textit{sklearn Pipeline}, huấn luyện trên tập train và đánh giá trên tập test bằng các chỉ số như ROC AUC, Accuracy, Recall, Precision, F1 và confusion matrix.
+  \item \textbf{Suy luận thống kê và Odds Ratio}: fit mô hình Logit bằng Statsmodels trên ma trận thiết kế đã dummy hoá, trích xuất hệ số, OR, khoảng tin cậy và p-value để phân tích ý nghĩa thống kê của từng biến.
+  \item \textbf{Tổng hợp kết quả và trực quan hoá}: sinh các bảng kết quả, biểu đồ (ROC, confusion matrix, phân phối theo churn, forest plot OR) và báo cáo văn bản nhằm kết nối kết quả định lượng với các khuyến nghị nghiệp vụ.
+\end{enumerate}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[
+    node distance=1.1 cm,
+    every node/.style={rectangle,draw,rounded corners,align=center,font=\small,minimum width=4.4cm,minimum height=1.0cm},
+    arrow/.style={-{Latex[length=2mm]},thick}
+  ]
+    \node (load) {Nạp dữ liệu\\\footnotesize WA\_Fn-UseC\_-HR-Employee-Attrition.csv};
+    \node (pre)  [below=of load] {Tiền xử lý \& tách tập\\\footnotesize Đặc tả biến, one-hot, chuẩn hoá, stratified split};
+    \node (train)[below=of pre]  {Huấn luyện Logistic Regression\\\footnotesize sklearn Pipeline + class\_weight = balanced};
+    \node (eval) [below=of train] {Đánh giá mô hình\\\footnotesize ROC AUC, confusion matrix, metrics};
+    \node (or)   [below=of eval]  {Logit \& Odds Ratio\\\footnotesize Statsmodels, OR, CI, p-value};
+    \node (report) [below=of or]  {Báo cáo \& trực quan hoá\\\footnotesize Bảng kết quả, biểu đồ};
+
+    \draw[arrow] (load) -- (pre);
+    \draw[arrow] (pre)  -- (train);
+    \draw[arrow] (train)-- (eval);
+    \draw[arrow] (eval) -- (or);
+    \draw[arrow] (or)   -- (report);
+  \end{tikzpicture}
+  \caption{Sơ đồ luồng xử lý từ dữ liệu thô đến báo cáo kết quả}
+\end{figure}
+
+

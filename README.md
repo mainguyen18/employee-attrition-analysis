@@ -2,15 +2,15 @@
 
 **Repository**: `hr-employee-statistical-analysis`
 
-Nghiên cứu các yếu tố ảnh hưởng đến quyết định rời bỏ của khách hàng ngân hàng bằng mô hình Hồi quy Logistic (Logistic Regression).
+Nghiên cứu các yếu tố ảnh hưởng đến quyết định nghỉ việc của nhân viên (Employee Attrition) bằng mô hình Hồi quy Logistic (Logistic Regression).
 
-**Dataset**: `data/Churn_Modelling.csv`  
-Nguồn: [Kaggle - Bank Customer Churn Prediction](https://www.kaggle.com/datasets/shantanudhakadd/bank-customer-churn-prediction)
+**Dataset**: `data/WA_Fn-UseC_-HR-Employee-Attrition.csv`  
+Nguồn: [Kaggle - IBM HR Analytics Employee Attrition & Performance](https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset)
 
 ## Tổng quan
 
 Project này sử dụng:
-- **Logistic Regression** (sklearn) cho dự đoán churn
+- **Logistic Regression** (sklearn) cho dự đoán khả năng nghỉ việc
 - **Logit model** (statsmodels) cho suy luận thống kê và Odds Ratio
 - **LaTeX** cho báo cáo và presentation slides (Beamer)
 
@@ -24,7 +24,6 @@ Project này sử dụng:
 - **`report/`**: 
   - Báo cáo LaTeX chi tiết (`main.tex`, `main.pdf`)
   - Presentation slides Beamer (`presentation.tex`, `presentation.pdf`)
-  - Báo cáo Markdown chi tiết cho luận văn (`PROJECT_REPORT_FULL.md`)
 
 ## Quy ước xuất kết quả
 
@@ -41,24 +40,24 @@ Project này sử dụng:
 
 ### Option A: Conda (khuyến nghị nếu bạn đang dùng `data_science`)
 
-```powershell
+```bash
 conda activate data_science
-python -m pip install -r requirements.txt
-python -m pip install -e .
+pip install -r requirements.txt
+pip install -e .
 ```
 
 Nếu bạn không muốn activate trực tiếp, có thể dùng `conda run`:
 
-```powershell
-conda run -n data_science python -m pip install -r requirements.txt
-conda run -n data_science python -m pip install -e .
+```bash
+conda run -n data_science pip install -r requirements.txt
+conda run -n data_science pip install -e .
 ```
 
 ### Option B: venv
 
 ```bash
-python -m venv .venv
-.\.venv\Scripts\activate
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 pip install -e .
 ```
@@ -71,8 +70,8 @@ python scripts/run_pipeline.py
 
 Nếu bạn **chưa** cài `pip install -e .`, có thể chạy nhanh bằng `PYTHONPATH` (đặt đường dẫn import tạm thời):
 
-```powershell
-$env:PYTHONPATH="src"
+```bash
+export PYTHONPATH="src"
 python scripts/run_pipeline.py
 ```
 
@@ -105,8 +104,6 @@ latexmk -pdf presentation.tex
 - **`outputs/logistic_pipeline.joblib`**: pipeline sklearn đã train (binary artifact - file nhị phân, có thể tái tạo).
 - **`outputs/odds_ratio_table.csv`**, **`outputs/logit_summary.txt`**: kết quả statsmodels Logit + Odds Ratio.
 - **`outputs/odds_ratio_analysis.txt`**: báo cáo diễn giải OR (data-driven).
-- **`PROJECT_REPORT.md`**: báo cáo Markdown tổng hợp (tự sinh).
-- **`report/PROJECT_REPORT_FULL.md`**: báo cáo Markdown chi tiết phục vụ luận văn/bảo vệ.
 - **`figures/`**: ROC, confusion matrix, EDA distributions, forest plot OR.
 
 ### LaTeX outputs

@@ -3,8 +3,8 @@
 Dep. Variable:              Attrition   No. Observations:                 1470
 Model:                          Logit   Df Residuals:                     1427
 Method:                           MLE   Df Model:                           42
-Date:                Thu, 26 Mar 2026   Pseudo R-squ.:                  0.3375
-Time:                        00:30:10   Log-Likelihood:                -430.16
+Date:                Sat, 28 Mar 2026   Pseudo R-squ.:                  0.3375
+Time:                        20:41:27   Log-Likelihood:                -430.16
 converged:                       True   LL-Null:                       -649.29
 Covariance Type:            nonrobust   LLR p-value:                 2.012e-67
 ====================================================================================================

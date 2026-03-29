@@ -33,17 +33,23 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Mô hình Logistic Regression - Công thức}
-  \textbf{Mô hình xác suất:} Với vector đặc trưng $x \in \mathbb{R}^d$:
+\begin{frame}{Logistic Regression - Bài toán và Công thức}
+  \textbf{Bài toán:} Tính xác suất một nhân viên sẽ đưa ra quyết định nghỉ việc (Attrition = 1).
+  
+  \vspace{0.2cm}
+  \textbf{Công thức xác suất Sigmoid:}
   \[
-  p(y=1\mid x) = \sigma(z) = \frac{1}{1+e^{-z}}, \quad z = \beta_0 + \beta^\top x
+  p(y=1\mid x) = \frac{1}{1+e^{-z}}, \quad \text{với } z = \beta_0 + \beta_1 x_1 + \dots + \beta_d x_d
   \]
   
-  \vspace{0.5cm}
-  \textbf{Dạng logit (log-odds):}
-  \[
-  \log\left(\frac{p}{1-p}\right) = \beta_0 + \sum_{j=1}^{d}\beta_j x_j
-  \]
+  \textbf{Tính toán từng phần tử để thay vào công thức:}
+  \begin{itemize}
+    \item \textbf{$p(y=1\mid x)$:} Kết quả đầu ra (xác suất làm tròn nội suy từ 0 đến 1).
+    \item \textbf{Biến hệ $x_i$:} Giá trị đặc trưng của nhân viên (VD: $x_1$ = Age, $x_2$ = OverTime=Yes).
+    \item \textbf{Trọng số $\beta_i$:} Mức độ tác động của đặc trưng (Do thuật toán tính toán).
+    \item \textbf{Tính $z$:} Nhân thực tế từng giá trị $x_i$ của nhân viên đó với hệ số $\beta_i$, rồi lấy tổng cộng với hệ số tự do $\beta_0$.
+    \item \textbf{Toán hạng hàm mũ $e$:} Thế $z$ vào $1+e^{-z}$ ở mẫu số để ánh xạ kết quả $z$ tuyến tính thành một xác suất toán học.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Hàm mục tiêu và Regularization}

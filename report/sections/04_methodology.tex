@@ -1,14 +1,31 @@
 \chapter{Phương pháp (Methodology)}
 
 \section{Logistic Regression}
-\subsection{Mô hình xác suất}
-Với vector đặc trưng \(x \in \mathbb{R}^d\), mô hình Logistic Regression ước lượng xác suất churn:
+\subsection{Mô hình dự đoán xác suất (Bài toán và Công thức)}
+
+\textbf{Định nghĩa bài toán:} Mục tiêu là dự đoán xác suất một nhân viên cụ thể sẽ lựa chọn rời bó công ty (\(y = 1\), nghỉ việc) dựa trên thông tin hồ sơ của họ (như Tuổi, Mức lương, Mức độ di chuyển, Thời gian làm việc, v.v.).
+
+\textbf{Công thức thống kê xác suất:} Với vector đặc trưng dữ liệu đầu vào \(x \in \mathbb{R}^d\) của một nhân viên, mô hình Logistic Regression sử dụng hàm Sigmoid (\(\sigma\)) để tính toán xác suất xảy ra biến cố:
 \[
-p(y=1\mid x) = \sigma(z) = \frac{1}{1+e^{-z}},\quad z = \beta_0 + \beta^\top x.
+p(y=1\mid x) = \sigma(z) = \frac{1}{1+e^{-z}}
 \]
-Dạng logit (log-odds):
+
+\textbf{Cách tính từng phần tử để thay vào công thức trên:}
+\begin{itemize}
+    \item \(\mathbf{p(y=1\mid x)}\): Đại lượng đích cần dự đoán, là tỷ lệ phần trăm (0 đến 1) phản ánh nguy cơ nhân viên này sẽ từ chức.
+    \item \(\mathbf{x_1, x_2, \dots, x_d}\): Các biến độc lập quan sát được từ nhân viên. (Ví dụ: \(x_1 =\) Số tuổi, \(x_2 =\) Mức thu nhập, \(x_3 =\) Có làm OT hay không).
+    \item \(\mathbf{\beta_1, \beta_2, \dots, \beta_d}\): Các hệ số hồi quy (trọng số) tương ứng. Đây là tham số mà mô hình phải tối ưu. Hệ số dương nghĩa là biến đó làm tăng xát suất bỏ việc; hệ số âm làm giảm xác suất.
+    \item \(\mathbf{\beta_0}\): Sai số chuẩn (Intercept/Bias), đại diện cho mức rủi ro mặc định.
+    \item \(\mathbf{z}\): Chỉ số "đòn bẩy" tổng hợp. Để tính \(z\), ta \textbf{thế giá trị thực tế} từng yếu tố (\(x_i\)) của nhân viên đó, nhân cho mức độ quan trọng (\(\beta_i\)) rồi cộng dồn lại kèm hệ số gốc \(\beta_0\):
+    \[
+    z = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_d x_d = \beta_0 + \beta^\top x
+    \]
+    \item \(\mathbf{e}\): Hằng số Euler (\(\approx 2.718\)). Cuối cùng, số đo \(z\) nhận được sẽ thế thẳng vào hàm \(\frac{1}{1 + e^{-z}}\) để bẻ cong kết quả trong giới hạn an toàn để thoả mãn tính chất xác suất xác định (nằm trên đoạn \([0, 1]\)).
+\end{itemize}
+
+Bằng thuật toán biến đổi nghịch đảo, phương trình log-odds (logit) của công thức trên trở thành một đường thẳng cấu tạo thuận tiện diễn giải:
 \[
-\log\left(\frac{p}{1-p}\right) = \beta_0 + \beta^\top x.
+\log\left(\frac{p}{1-p}\right) = z = \beta_0 + \beta_1 x_1 + \dots + \beta_d x_d
 \]
 
 \subsection{Lựa chọn hàm liên kết logit và cơ sở mô hình}

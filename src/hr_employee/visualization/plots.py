@@ -22,6 +22,7 @@ def plot_churn_rate_bar(df_rate, *, category_column: str, out_path: Path) -> Non
     ax.set_title(f"Churn rate by {category_column}")
     ax.set_xlabel(category_column)
     ax.set_ylabel("Churn rate")
+    plt.xticks(rotation=45, ha='right')
     save_current_figure(out_path)
 
 
